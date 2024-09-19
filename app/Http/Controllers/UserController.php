@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index() {
+    // public function index() {
 
         // $data = [
         //     'username' => 'customer-1',
@@ -120,9 +120,21 @@ class UserController extends Controller
         // $user->wasChanged('name'); //false
         // dd($user->wasChanged(['name', 'username'])); //true
 
-        $user = UserModel::all();
+    //     $user = UserModel::all();
+    //     return view('user', ['data' => $user]);
+    // }
+
+    // public function index() {
+    //     $user = UserModel::all();
+    //     return view('user', ['data' => $user]);
+    // }
+
+    public function index() {
+        // Mengambil data user beserta level yang terkait menggunakan eager loading
+        $user = UserModel::with('level')->get();
         return view('user', ['data' => $user]);
     }
+
 
     public function tambah() {
         return view('user_tambah');
@@ -159,7 +171,7 @@ class UserController extends Controller
     public function hapus($id) {
         $user = UserModel::find($id);
         $user->delete();
-        
+
         return redirect('/user');
     }
 }
