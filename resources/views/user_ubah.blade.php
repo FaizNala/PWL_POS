@@ -8,7 +8,7 @@
             <h1 class="mb-4">Form Ubah Data User</h1>
             <a href="/user" class="btn btn-secondary mb-3">Kembali</a>
 
-            <form method="post" action="/user/ubah/{{$data->user_id}}">
+            <form method="post" action="/user/ubah_simpan/{{$data->user_id}}">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
 
