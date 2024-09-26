@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('user_id');
             $table->unsignedBigInteger('level_id')->index(); // indexing untuk ForeignKey
             $table->string('username', 20)->unique(); // unique untuk memastikan tidak ada username yang sama
-            $table->string('name', 100);
+            $table->string('nama', 100);
             $table->string('password');
             $table->timestamps();
 

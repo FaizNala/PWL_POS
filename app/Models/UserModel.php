@@ -12,7 +12,7 @@ class UserModel extends Model
     protected $table = 'm_user'; // Mendefinisikan nama tabel
     protected $primaryKey = 'user_id'; // Mendefinisikan primary key
 
-    protected $fillable = ['level_id', 'username', 'name', 'password'];
+    protected $fillable = ['level_id', 'username', 'nama', 'password'];
 
     // Relasi ke LevelModel (belongsTo)
     public function level(): BelongsTo {
