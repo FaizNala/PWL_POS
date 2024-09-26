@@ -15,6 +15,22 @@
             @if (session('error'))
                 <div class="alert alert-success">{{ session('error') }}</div>
             @endif
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="col-1 control-label col-form-label">Filter: </label>
+                        <div class="col-3">
+                            <select class="form-control" name="level_id" id="level_id" required>
+                                <option value="">-- Semua --</option>
+                                @foreach ($level as $item)
+                                    <option value="{{ $item->level_id }}">{{ $item->level_nama }}</option>
+                                @endforeach
+                            </select>
+                            <small class="form-text text-muted">Level User</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <table class="table table-bordered table-striped table-hover table-sm" id="table_user">
                 <thead>
                     <tr>
@@ -34,54 +50,52 @@
 @endpush
 
 @push('js')
-<script>
-    $(document).ready(function() {
-        var dataUser = $('#table_user').DataTable({
-            serverSide: true,
-            ajax: {
-                "url": "{{ url('user/list') }}",
-                "dataType": "json",
-                "type": "POST",
-                "data": function(d) {
-                    d.level_id = $('#level_id').val(); // Filter level_id jika ada
-                }
-            },
-            // Mengatur pengurutan default berdasarkan user_id
-            order: [
-                [0, 'asc'] // Mengurutkan berdasarkan kolom pertama (user_id)
-            ],
-            columns: [
-                {
-                    data: 'user_id', // Pastikan data ID diambil dari response server
-                    className: "text-center",
-                    width: "5%",
-                    orderable: true // Memungkinkan kolom ID untuk diurutkan
+    <script>
+        $(document).ready(function() {
+            var dataUser = $('#table_user').DataTable({
+                serverSide: true,
+                ajax: {
+                    "url": "{{ url('user/list') }}",
+                    "dataType": "json",
+                    "type": "POST",
+                    "data": function(d) {
+                        d.level_id = $('#level_id').val(); // Filter level_id jika ada
+                    }
                 },
-                {
-                    data: "level.level_nama", // Data level pengguna dari relasi ORM
-                    orderable: false // Kolom level tidak bisa diurutkan
-                },
-                {
-                    data: "nama", // Nama pengguna
-                    orderable: true, // Kolom ini bisa diurutkan
-                },
-                {
-                    data: "username", // Username pengguna
-                    orderable: true, // Kolom ini bisa diurutkan
-                },
-                {
-                    data: 'action', // Tombol aksi (Edit, Hapus, dsb.)
-                    orderable: false, // Kolom aksi tidak perlu diurutkan
-                    searchable: false // Tidak perlu pencarian pada kolom aksi
-                }
-            ]
-        });
+                // Mengatur pengurutan default berdasarkan user_id
+                order: [
+                    [0, 'asc'] // Mengurutkan berdasarkan kolom pertama (user_id)
+                ],
+                columns: [{
+                        data: 'user_id', // Pastikan data ID diambil dari response server
+                        className: "text-center",
+                        width: "5%",
+                        orderable: true // Memungkinkan kolom ID untuk diurutkan
+                    },
+                    {
+                        data: "level.level_nama", // Data level pengguna dari relasi ORM
+                        orderable: false // Kolom level tidak bisa diurutkan
+                    },
+                    {
+                        data: "nama", // Nama pengguna
+                        orderable: true, // Kolom ini bisa diurutkan
+                    },
+                    {
+                        data: "username", // Username pengguna
+                        orderable: true, // Kolom ini bisa diurutkan
+                    },
+                    {
+                        data: 'action', // Tombol aksi (Edit, Hapus, dsb.)
+                        orderable: false, // Kolom aksi tidak perlu diurutkan
+                        searchable: false // Tidak perlu pencarian pada kolom aksi
+                    }
+                ]
+            });
 
-        // Reload tabel saat filter level diubah
-        $('#level_id').on('change', function() {
-            dataUser.ajax.reload();
+            // Reload tabel saat filter level diubah
+            $('#level_id').on('change', function() {
+                dataUser.ajax.reload();
+            });
         });
-    });
-</script>
-
+    </script>
 @endpush
