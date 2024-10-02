@@ -65,7 +65,6 @@
                 columns: [{
                         data: "DT_RowIndex", // Menampilkan nomor urut dari Laravel DataTables addIndexColumn()
                         className: "text-center",
-                        width: "8%",
                         orderable: false,
                         searchable: false
                     },
