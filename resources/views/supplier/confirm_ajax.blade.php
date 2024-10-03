@@ -41,7 +41,7 @@
                         </tr>
                         <tr>
                             <th class="text-right col-3">Supplier Alamat :</th>
-                            <td class="col-9">{{ $supplier->supplier_nama }}</td>
+                            <td class="col-9">{{ $supplier->supplier_alamat }}</td>
                         </tr>
                     </table>
                 </div>
