@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table-bordered table-striped table-hover table-sm table" id="table_level">
+            <table class="table-bordered table-striped table-hover table-sm table" id="table_kategori">
                 <thead>
                     <tr>
                         <th>ID</th>
