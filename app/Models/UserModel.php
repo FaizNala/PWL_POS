@@ -18,7 +18,4 @@ class UserModel extends Model
     public function level(): BelongsTo {
         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
     }
-    public function Penjualan(): BelongsTo {
-        return $this->belongsTo(PenjualanModel::class, 'user_id', 'user_id'); // Mendefinisikan foreign key
-    }
 }

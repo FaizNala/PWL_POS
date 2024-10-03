@@ -12,11 +12,7 @@ class LevelModel extends Model
 
     protected $table = 'm_level'; // Mendefinisikan nama tabel
     protected $primaryKey = 'level_id'; // Mendefinisikan primary key
-
-    // Relasi ke UserModel (hasMany)
-    // public function users(): HasMany {
-    //     return $this->hasMany(UserModel::class, 'level_id', 'level_id');
-    // }
+    protected $fillable = ['level_kode', 'level_nama'];
 
     public function users(): BelongsTo {
         return $this->belongsTo(UserModel::class, 'level_id', 'level_id'); // Mendefinisikan foreign key

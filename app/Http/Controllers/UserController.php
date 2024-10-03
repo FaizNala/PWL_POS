@@ -177,29 +177,34 @@ class UserController extends Controller
 
     public function store_ajax(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'level_id' => 'required|integer',
-            'username' => 'required|string|min:3|unique:m_user,username',
-            'nama' => 'required|string|max:100',
-            'password' => 'required|min:6'
-        ]);
 
-        if ($validator->fails()) {
+        if($request->ajax() || $request->wantsJson()) {
+            $rules = [
+                'level_id' => 'required|integer',
+                'username' => 'required|string|min:3|unique:m_user,username',
+                'nama' => 'required|string|max:100',
+                'password' => 'required|min:5'
+            ];
+
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validasi Gagal',
+                    'msgField' => $validator->errors(),
+                ]);
+            }
+
+            UserModel::create($request->all());
+
             return response()->json([
-                'status' => false,
-                'message' => 'Validasi Gagal',
-                'msgField' => $validator->errors(),
+                'status' => true,
+                'message' => 'Data user berhasil disimpan'
             ]);
         }
-
-        UserModel::create($request->all());
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Data user berhasil disimpan'
-        ]);
+        return redirect('/');
     }
-
 
     public function edit_ajax(String $id) {
         $user = UserModel::find($id);
@@ -215,7 +220,7 @@ class UserController extends Controller
                 'level_id' => 'required|integer',
                 'username' => 'required|string|min:3|unique:m_user,username,'.$id.',user_id',
                 'nama' => 'required|string|max:100',
-                'password' => 'nullable|min:6|max:20'
+                'password' => 'nullable|min:5|max:20'
             ];
 
             // use Illuminate\Support\Facades\vaidator
