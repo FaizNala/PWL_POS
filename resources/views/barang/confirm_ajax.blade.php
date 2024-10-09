@@ -78,7 +78,7 @@
                                     title: 'Berhasil',
                                     text: response.message
                                 });
-                                databarang.ajax.reload();
+                                dataBarang.ajax.reload();
                             } else {
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {
