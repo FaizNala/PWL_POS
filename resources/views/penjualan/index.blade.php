@@ -3,11 +3,11 @@
 @section('content')
     <div class="card card-outline card-primary">
         <div class="card-header">
-            <h3 class="card-title">Daftar Supplier</h3>
+            <h3 class="card-title">Daftar penjualan</h3>
             <div class="card-tools">
-                <a href="{{ url('/supplier/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Supplier</a>
-                <a href="{{ url('/supplier/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Supplier</a>
-                <button onclick="modalAction('{{ url('/supplier/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
+                <a href="{{ url('/penjualan/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Penjualan</a>
+                <a href="{{ url('/penjualan/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Penjualan</a>
+                <button onclick="modalAction('{{ url('/penjualan/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
             </div>
         </div>
         <div class="card-body">
@@ -17,13 +17,14 @@
             @if (session('error'))
                 <div class="alert alert-error">{{ session('error') }}</div>
             @endif
-            <table class="table table-bordered table-striped table-hover table-sm" id="table-supplier">
+            <table class="table table-bordered table-striped table-hover table-sm" id="table-penjualan">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Kode Supplier</th>
-                        <th>Nama Supplier</th>
-                        <th>Alamat Supplier</th>
+                        <th>Nama penjualan</th>
+                        <th>Pembeli</th>
+                        <th>Penjualan Kode</th>
+                        <th>Penjualan Tanggal</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -43,17 +44,17 @@
                 $('#myModal').modal('show');
             })
         }
-        var dataSupplier;
+        var dataPenjualan;
         $(document).ready(function() {
-            dataSupplier = $('#table-supplier').DataTable({
+            dataPenjualan = $('#table-penjualan').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('supplier/list') }}",
+                    "url": "{{ url('penjualan/list') }}",
                     "dataType": "json",
                     "type": "POST",
                     "data": function(d) {
-                        d.filter_kode = $('#supplier_kode').val(); // Filter by supplier_kode
+                        d.filter_level = $('.filter_level').val();
                     }
                 },
                 columns: [{
@@ -63,21 +64,27 @@
                         searchable: false
                     },
                     {
-                        data: "supplier_kode",
+                        data: "user.nama",
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: "supplier_nama",
+                        data: "pembeli",
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: "supplier_alamat",
-                        orderable: true,
-                        searchable: true
+                        data: "penjualan_kode",
+                        orderable: false,
+                        searchable: false
                     },
                     {
+                        data: "penjualan_tanggal",
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        // Kolom aksi (Edit, Hapus)
                         data: "aksi",
                         orderable: false,
                         searchable: false
@@ -85,13 +92,9 @@
                 ]
             });
 
-            $('#supplier_kode').on('change', function() {
-                dataSupplier.ajax.reload(); // Reload table when filter is applied
-            });
-
-            $('#table-supplier_filter input').unbind().bind().on('keyup', function(e) {
-                if (e.keyCode == 13) {
-                    dataSupplier.search(this.value).draw();
+            $('#table-penjualan_filter input').unbind().bind().on('keyup', function(e) {
+                if (e.keyCode == 13) { // enter key
+                    dataPenjualan.search(this.value).draw();
                 }
             });
         });

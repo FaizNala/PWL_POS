@@ -28,6 +28,11 @@ class UserModel extends Authenticatable
         return $this->belongsTo(StokModel::class, 'user_id', 'user_id');
     }
 
+    public function Penjualan(): BelongsTo
+    {
+        return $this->belongsTo(PenjualanModel::class, 'user_id', 'user_id');
+    }
+
     public function getRoleName(): string
     {
         return $this->level->level_nama;

@@ -51,11 +51,6 @@ class BarangController extends Controller
         return DataTables::of($barang)
             ->addIndexColumn()
             ->addColumn('aksi', function ($barang) { // menambahkan kolom aksi
-                /*$btn = '<a href="'.url('/barang/' . $barang->barang_id).'" class="btn btn-info btn-sm">Detail</a> ';
-                $btn .= '<a href="'.url('/barang/' . $barang->barang_id .'/edit').'"class="btn btn-warning btn-sm">Edit</a> ';
-                $btn .= '<form class="d-inline-block" method="POST" action="'. url('/barang/'.$barang->barang_id).'">'
-                    . csrf_field() . method_field('DELETE') .
-                    '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Kita yakit menghapus data ini?\');">Hapus</button></form>';*/
                 $btn = '<button onclick="modalAction(\'' . url('/barang/' . $barang->barang_id
                     . '/show_ajax') . '\')" class="btn btn-info btn-sm">Detail</button> ';
                 $btn .= '<button onclick="modalAction(\'' . url('/barang/' . $barang
@@ -103,12 +98,20 @@ class BarangController extends Controller
         return redirect('/');
     }
 
+    public function show_ajax(string $id)
+    {
+        $barang = BarangModel::find($id);
+        $kategori = KategoriModel::select('kategori_id', 'kategori_nama')->get();
+        return view('barang.show_ajax', ['barang' => $barang, 'kategori' => $kategori]);
+    }
+
     public function edit_ajax(string $id)
     {
         $barang = BarangModel::find($id);
         $kategori = KategoriModel::select('kategori_id', 'kategori_nama')->get();
         return view('barang.edit_ajax', ['barang' => $barang, 'kategori' => $kategori]);
     }
+
     public function update_ajax(Request $request, $id)
     {
         // cek apakah request dari ajax
