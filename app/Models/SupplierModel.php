@@ -13,4 +13,9 @@ class SupplierModel extends Model
     protected $primaryKey ='supplier_id'; // Mendefinisikan primary key
     protected $fillable = ['supplier_id','supplier_kode','supplier_nama','supplier_alamat'];
 
+    public function stok(): BelongsTo
+    {
+        return $this->belongsTo(StokModel::class,'supplier_id','supplier_id'); // Mendefinisikan foreign key
+    }
+
 }

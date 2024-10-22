@@ -79,12 +79,7 @@ class BarangController extends Controller
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
                 'kategori_id' => ['required', 'integer', 'exists:m_kategori,kategori_id'],
-                'barang_kode' => [
-                    'required',
-                    'min:3',
-                    'max:20',
-                    'unique:m_barang,barang_kode'
-                ],
+                'barang_kode' => ['required', 'min:3', 'max:20', 'unique:m_barang,barang_kode'],
                 'barang_nama' => ['required', 'string', 'max:100'],
                 'harga_beli' => ['required', 'numeric'],
                 'harga_jual' => ['required', 'numeric'],

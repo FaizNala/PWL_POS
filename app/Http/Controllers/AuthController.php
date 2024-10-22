@@ -19,7 +19,7 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         if ($request->ajax() || $request->wantsJson()) {
-            $credentials = $request->only('username', 'password');
+            $credentials = $request->only('username', 'nama', 'password');
 
             if (Auth::attempt($credentials)) {
                 return response()->json([

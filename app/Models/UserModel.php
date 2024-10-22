@@ -12,7 +12,7 @@ class UserModel extends Authenticatable
     use HasFactory;
     protected $table = 'm_user';
     protected $primaryKey = 'user_id';
-    protected $fillable = ['level_id', 'username', 'nama', 'password', 'created_at', 'updated_at'];
+    protected $fillable = ['level_id', 'username', 'nama', 'password', 'avatar', 'created_at', 'updated_at'];
 
     protected $hidden = ['password'];
 
@@ -21,6 +21,11 @@ class UserModel extends Authenticatable
     public function level(): BelongsTo
     {
         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
+    }
+
+    public function stok(): BelongsTo
+    {
+        return $this->belongsTo(StokModel::class, 'user_id', 'user_id');
     }
 
     public function getRoleName(): string

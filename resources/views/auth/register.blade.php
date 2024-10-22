@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Registration Page (v2)</title>
+    <title>Register | POS System</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -17,13 +17,108 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
+    <link rel="icon" href="{{ asset('tab_logo.png') }}" type="image/png">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .register-box {
+            width: 400px;
+        }
+
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            border: none;
+        }
+
+        .card-header {
+            background-color: #5a67d8;
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .card-header .h1 {
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 24px;
+        }
+
+        .login-box-msg {
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background-color: #4caf50;
+            border-color: #4caf50;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #43a047;
+            border-color: #388e3c;
+        }
+
+        .input-group-text {
+            background-color: #5a67d8;
+            border-color: #5a67d8;
+            color: white;
+            border-radius: 0 0.25rem 0.25rem 0;
+        }
+
+        .form-control {
+            font-size: 16px;
+            height: 45px;
+            border-radius: 0.25rem;
+        }
+
+        .icheck-primary label {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .card-footer {
+            background-color: #f9fafb;
+        }
+
+        .register-box .card-body {
+            padding: 40px;
+            background-color: white;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        .btn-block {
+            border-radius: 25px;
+            padding: 10px;
+        }
+
+        /* Small tweaks for error messages */
+        .error-text {
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+    </style>
 </head>
 
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="{{ url('/') }}" class="h1"><b>Admin</b>LTE</a>
+                <a href="{{ url('/') }}" class="h1"><b>POS</b> System</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Register a new staff</p>
@@ -31,28 +126,27 @@
                 <form action="{{ url('register') }}" method="post" id="form-register">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" id="username" name="username" class="form-control"
-                            placeholder="Username">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                        <small id="error-username" class="error-text text-danger"></small>
-                        @error('username')
-                            <small class="form-text text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama">
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+                        <small id="error-username" class="error-text text-danger"></small>
+                        @error('username')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="nama" name="nama" class="form-control" placeholder="Name">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user-tag"></span>
+                            </div>
+                        </div>
                         <small id="error-name" class="error-text text-danger"></small>
                         @error('nama')
-                            <small class="form-text text-danger">{{ $message }}</small>
+                        <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="input-group mb-3">
@@ -65,7 +159,7 @@
                         </div>
                         <small id="error-password" class="error-text text-danger"></small>
                         @error('password')
-                            <small class="form-text text-danger">{{ $message }}</small>
+                        <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="row">
@@ -73,12 +167,12 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
-                <a href="{{ url('login') }}" class="text-center">Sudah punya akun</a>
+                <a href="{{ url('login') }}" class="text-center d-block mt-3">Already have an account?</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->
