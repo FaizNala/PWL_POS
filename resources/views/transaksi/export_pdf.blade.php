@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
@@ -76,11 +77,11 @@
 <body>
     <table class="border-bottom-header">
         <tr>
-            <td width="15%" class="text-center"><img src="{{ asset('polinema-bw.png') }}" width="130%"></td>
+            <td width="15%" class="text-center"><img src="{{ asset('polinema-bw.png') }}" style="width: 60; height= 60;"></td>
             <td width="85%">
-                <span class="text-center d-block font-12 font-bold mb-1">KEMENTERIAN
+                <span class="text-center d-block font-11 font-bold mb-1">KEMENTERIAN
                     PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI</span>
-                <span class="text-center d-block font-11 font-bold mb-1">POLITEKNIK NEGERI
+                <span class="text-center d-block font-13 font-bold mb-1">POLITEKNIK NEGERI
                     MALANG</span>
                 <span class="text-center d-block font-10">Jl. Soekarno-Hatta No. 9 Malang
                     65141</span>
@@ -91,28 +92,29 @@
         </tr>
     </table>
 
-    <h3 class="text-center">LAPORAN DATA USER</h3>
+    <h3 class="text-center">LAPORAN DATA PENJUALAN</h4>
         <table class="border-all">
             <thead>
                 <tr>
                     <th class="text-center">No</th>
                     <th>Nama User</th>
-                    <th>Pembeli</th>
+                    <th>Nama Pembeli</th>
                     <th>Kode Penjualan</th>
-                    <th>Tanggal Transaksi</th>
+                    <th>Penjualan Tanggal</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($penjualan as $p)
+                @foreach ($transaksi as $b)
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
-                        <td>{{ $p->user->nama }}</td>
-                        <td>{{ $p->pembeli }}</td>
-                        <td>{{ $p->penjualan_kode }}</td>
-                        <td>{{ $p->level->penjualan_tanggal }}</td>
+                        <td>{{ $b->user->name }}</td>
+                        <td>{{ $b->pembeli }}</td>
+                        <td>{{ $b->penjualan_kode }}</td>
+                        <td>{{ $b->penjualan_tanggal }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 </body>
+
 </html>

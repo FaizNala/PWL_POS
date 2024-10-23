@@ -28,9 +28,9 @@ class UserModel extends Authenticatable
         return $this->belongsTo(StokModel::class, 'user_id', 'user_id');
     }
 
-    public function Penjualan(): BelongsTo
+    public function Transaksi(): BelongsTo
     {
-        return $this->belongsTo(PenjualanModel::class, 'user_id', 'user_id');
+        return $this->belongsTo(TransaksiModel::class, 'user_id', 'user_id');
     }
 
     public function getRoleName(): string

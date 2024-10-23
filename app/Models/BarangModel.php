@@ -23,4 +23,8 @@ class BarangModel extends Model
     {
         return $this->belongsTo(StokModel::class, 'barang_id', 'barang_id');
     }
+    public function transaksiDetail(): BelongsTo
+    {
+        return $this->belongsTo(TransaksiDetailModel::class, 'barang_id', 'barang_id');
+    }
 }

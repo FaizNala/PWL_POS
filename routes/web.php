@@ -165,22 +165,25 @@ Route::middleware(['auth'])->group(function() {
         });
     });
 
-    // Penjualan routes
     Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
-        Route::group(['prefix' => 'penjualan'], function() {
-            Route::get('/', [PenjualanController::class, 'index']);
-            Route::post('/list', [PenjualanController::class, 'list']);
-            Route::get('/create_ajax', [PenjualanController::class, 'create_ajax']);
-            Route::post('/ajax', [PenjualanController::class, 'store_ajax']);
-            Route::get('{id}/show_ajax', [PenjualanController::class, 'show_ajax']);
-            Route::get('/{id}/edit_ajax', [PenjualanController::class, 'edit_ajax']);
-            Route::put('/{id}/update_ajax', [PenjualanController::class, 'update_ajax']);
-            Route::get('/{id}/delete_ajax', [PenjualanController::class, 'confirm_ajax']);
-            Route::delete('/{id}/delete_ajax', [PenjualanController::class, 'delete_ajax']);
-            Route::get('/import', [PenjualanController::class, 'import']);
-            Route::post('/import_ajax', [PenjualanController::class, 'import_ajax']);
-            Route::get('/export_excel', [PenjualanController::class, 'export_excel']);
-            Route::get('/export_pdf', [PenjualanController::class, 'export_pdf']);
+        Route::group(['prefix' => 'transaksi'], function () {
+            Route::get('/', [TransaksiController::class, 'index']);
+            Route::post('/list', [TransaksiController::class, 'list']);
+            Route::get('/create', [TransaksiController::class, 'create']);
+            Route::post('/', [TransaksiController::class, 'store']);
+            Route::get('/create_ajax', [TransaksiController::class, 'create_ajax']);
+            Route::post('/ajax', [TransaksiController::class, 'store_ajax']);
+            Route::get('/{id}', [TransaksiController::class, 'show']);
+            Route::get('/{id}/edit', [TransaksiController::class, 'edit']);
+            Route::put('/{id}', [TransaksiController::class, 'update']);
+            Route::get('/{id}/show_ajax', [TransaksiController::class, 'show_ajax']);
+            Route::get('/{id}/edit_ajax', [TransaksiController::class, 'edit_ajax']);
+            Route::put('/{id}/update_ajax', [TransaksiController::class, 'update_ajax']);
+            Route::get('/{id}/delete_ajax', [TransaksiController::class, 'confirm_ajax']);
+            Route::delete('/{id}/delete_ajax', [TransaksiController::class, 'delete_ajax']);
+            Route::get('/export_pdf', [TransaksiController::class, 'export_pdf']);
+            Route::get('{id}/export_detail_pdf', [TransaksiController::class, 'export_detail_pdf']);
+            Route::delete('/{id}', [TransaksiController::class, 'destroy']);
         });
     });
 

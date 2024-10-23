@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar bg-dark">
     <!-- SidebarSearch Form -->
     <div class="form-inline mt-2">
         <div class="input-group" data-widget="sidebar-search">
@@ -64,7 +64,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/penjualan') }}" class="nav-link {{ $activeMenu == 'penjualan' ? 'active' : '' }}">
+                <a href="{{ url('/transaksi') }}" class="nav-link {{ $activeMenu == 'penjualan' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-cash-register"></i>
                     <p>Transaksi Penjualan</p>
                 </a>
