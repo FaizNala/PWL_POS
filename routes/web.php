@@ -26,8 +26,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+
 // Pattern enforcement for 'id' parameter (must be a number)
 Route::pattern('id', '[0-9]+');
+
+// Route untuk landing page
+Route::get('/', function () {
+    return view('landing_page');
+})->name('landing_page');
 
 // Auth routes
 Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -42,7 +48,7 @@ Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::middleware(['auth'])->group(function() {
 
     // Welcome route
-    Route::get('/', [WelcomeController::class, 'index']);
+    Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 
     // Semua route di dalam group ini harus punya role ADM
     Route::middleware(['authorize:ADM'])->group(function () {

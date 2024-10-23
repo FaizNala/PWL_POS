@@ -85,10 +85,4 @@ class ProfileController extends Controller
         }
         return redirect('/');
     }
-
-    public function show_ajax()
-    {
-        $user = Auth::user();
-        return view('profile.show_ajax', ['user' => $user]);
-    }
 }
